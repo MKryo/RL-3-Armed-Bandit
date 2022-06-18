@@ -37,7 +37,7 @@ class Agent:
 #環境生成　　パラメータ：各腕の報酬確率
 Env = Environment([0.3, 0.5, 0.7])
 #エージェント生成　　パラメータ：ε
-Agent = Agent(0.3)
+Agent = Agent(0.2)
 
 #学習回数の指定
 simulation_size = 100
@@ -58,7 +58,7 @@ for i in range(simulation_size):
     reward = Env.draw(arm_index)#選択された腕を環境に与え、その腕に関する報酬を返す
     Agent.update(arm_index, reward)#選択した腕と環境から返された報酬をエージェントに伝え、期待値の更新を行う
 
-    #regretは累積（積み重なっていく）ので、一個前の報酬確率の差を加えていく
+    #regretは累積（積み重なっていくので）、一個前の報酬確率の差を加えていく
     regret[i][t] += Env.p[2]-Env.p[arm_index]
     if t != 0:
       regret[i][t] += regret[i][t-1]
